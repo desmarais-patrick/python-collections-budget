@@ -1,4 +1,6 @@
 import collections
+import matplotlib.pyplot as plt
+
 from . import Expense
 
 expenses = Expense.Expenses()
@@ -16,5 +18,8 @@ top5 = spending_counter.most_common(5)
 # zip can combine lists
 # zip can take a dictionary and separate keys and values (note the * symbol):
 categories, count = zip(*top5)
-print(categories)
-print(count)
+
+fig, ax = plt.subplots()
+ax.bar(categories, count)
+ax.set_title("# of Purchases by Category")
+plt.show()
