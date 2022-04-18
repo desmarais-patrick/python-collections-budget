@@ -1,6 +1,8 @@
 import csv
 from datetime import datetime
 
+# from . import BudgetList
+
 class Expense():
     def __init__(self, date_str, vendor, category, amount):
         self.date_time = datetime.strptime(date_str, '%m/%d/%Y %H:%M:%S')
@@ -42,4 +44,31 @@ class Expenses():
             return [necessary_expenses, food_expenses, unnecessary_expenses]
 
     def categorize_set_comprehension(self):
-        pass
+        necessary_expenses = {x for x in self.list
+        if (x.category == 'Phone'    or x.category == 'Auto and Gas' or 
+            x.category == 'Classes'  or x.category == 'Utilities' or 
+            x.category == 'Mortgage')}
+        
+        food_expenses = {x for x in self.list
+        if (x.category == 'Groceries' or x.category == 'Eating Out')}
+
+        unnecessary_expenses = set(self.list) - necessary_expenses - food_expenses
+
+        return [necessary_expenses, food_expenses, unnecessary_expenses]
+
+#         print([x.category for x in self.list])
+#         print([x.category for x in necessary_expenses])
+#         print([x.category for x in food_expenses])
+#         print([x.category for x in unnecessary_expenses])
+    
+# def printCat(expense):
+#     return expense.category
+
+# def main():
+#     myBudgetList = BudgetList.BudgetList(1200)
+#     expenses = Expenses()
+#     expenses.read_expenses("data/spending_data.csv")
+#     expenses.categorize_set_comprehension()
+
+# if __name__ == "__main__":
+#     main()
